@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="whattowear.js" defer></script>
+	<title>Acclimate.</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<div id="startAnchor"></div>
+	<div id="colophon"><p>Created by <a href="../">Oliver Dunkley</a> ⋅ version 1.1 ⋅ published 2018-09-30 ⋅ fork me on <a href="https://github.com/oliverjd/acclimate">GitHub</a></p></div>
+	<div id="page">
+		<div id="startWrapper">
+			<div id="startContent">
+				<h1>A<span id="cc">cc</span>limate.</h1>
+				<p id="green">So, you're going for a bike ride.</p>
+				<p id="green">Don't waste time with the forecast.</p>
+				<p id="brown">For a ride lasting
+				<span class="styled-select">
+					<select id="hourSelect" class="select-class">
+						<option value="1">1</option>
+						<option value="2" SELECTED>2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+					</select>
+				</span><!--<a href="" id="rideHours">two</a>--> hours,</p>
+				<p id="brown">starting from
+				<span class="styled-select">
+					<input type="text" id="locationInput" class="input-class">
+				</span>
+				,</p>
+				<p id="grey"><a href="" id="startSwitch">tell me what to wear!</a></p>
+			</div>
+		</div>
+		<div id="resultsWrapper">
+			<div id="resultsContent"></div>
+		</div>
+		<div id="endAnchor"></div>
+	</div>
+</body>
+</html>
