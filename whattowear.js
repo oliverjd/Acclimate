@@ -165,11 +165,14 @@ function runProgram(jsonParsed, fullLocationName) {
     scrollTop: $("#endAnchor").offset().top
 	}, 1500);
 
+	$("#startSwitch").removeAttr("disabled");
+	$("#loading").hide();
+
 	startAgain = document.getElementById('startAgain');
 	startAgain.onclick = function() {
 		$('html, body').animate({
 			scrollTop: $("#startAnchor").offset().top
-		}, 1000, "linear", function() {
+		}, 500, "linear", function() {
 			resetResults();
 		});
 		return false;
@@ -208,20 +211,40 @@ function getWeatherFromCoordinates(fullName, lat, lon) {
 
 var startSwitch = document.getElementById('startSwitch');
 
-startSwitch.onclick = function() {
+function startEverything() {
 	resetResults();
 	if(document.getElementById('locationInput').value.length != 0){
+		$("#loading").show();
+		$("#startSwitch").attr("disabled", "disabled");
 		return getCoordinatesFromLocation();
 	} else {
 		return false;
 	}
 }
 
+startSwitch.onclick = function() {
+	startEverything();
+}
+
 function resizable (el, factor) {
   var int = Number(factor) || 7.7;
-  function resize() {el.style.width = ((el.value.length+1) * int) + 'px'}
+  function resize() {
+		el.style.width = ((el.value.length+1) * int) + 'px';
+		if (el.value.length == 0) {
+			$("#startSwitch").attr("disabled", "disabled");
+		} else {
+			$("#startSwitch").removeAttr("disabled");
+		}
+	}
   var e = 'keyup,keypress,focus,blur,change'.split(',');
   for (var i in e) el.addEventListener(e[i],resize,false);
   resize();
 }
 resizable(document.getElementById('locationInput'),30);
+
+$("#locationInput").keypress(function(e) {
+	var enterKey = 13;
+	if(e.which == enterKey) {
+		startEverything();
+	}
+});

@@ -12,7 +12,7 @@
 	<div id="page">
 		<div id="startWrapper">
 			<div id="startContent">
-				<h1>A<span id="cc">cc</span>limate.</h1>
+				<h1><a href=".">A<span id="cc">cc</span>limate.</a></h1>
 				<p id="green">So, you're going for a bike ride.</p>
 				<p id="green">Don't waste time with the forecast.</p>
 				<p id="brown">For a ride lasting
@@ -31,10 +31,13 @@
 				</span><!--<a href="" id="rideHours">two</a>--> hours,</p>
 				<p id="brown">starting from
 				<span class="styled-select">
-					<input type="text" id="locationInput" class="input-class">
+					<input type="text" id="locationInput" class="input-class" placeholder=" somewhere ">
 				</span>
 				,</p>
-				<p id="grey"><a href="" id="startSwitch">tell me what to wear!</a></p>
+				<p id="grey">
+					<!-- <a href="" id="startSwitch">tell me what to wear!</a> -->
+					<button id="startSwitch" type="button" disabled="disabled">tell me what to wear!</button> <span id="loading">loading...</span>
+				</p>
 			</div>
 		</div>
 		<div id="resultsWrapper">

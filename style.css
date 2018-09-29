@@ -28,10 +28,15 @@ body {
 	transform: translateY(-50%);
 }
 
-h1 {
+h1, h1 a, h1 a:visited {
 	font-size: 100pt;
 	color: #74b3e1;
 	height: 22vh;
+	text-decoration: none;
+}
+
+h1 a:hover, h1 a:active {
+	opacity: 0.7;
 }
 
 h1 #cc {
@@ -56,7 +61,7 @@ h2 a {
 	font-size: 44pt;
 	padding-bottom: 15px;
 	line-height: 130%;
-	height: 10vh;
+	/* height: 10vh; */
 }
 
 #green {
@@ -76,17 +81,54 @@ h2 a {
 	margin: 5px 0 5px 0;
 }
 
-#grey, #grey a {
+#grey {
 	color: #fff;
 	text-decoration: none;
 }
 
-#grey a {
+#grey button {
+	font-size: 44pt;
+	color: #fff;
 	background: #828282;
 	border-radius: 5px;
 	display: inline-block;
 	padding: 0 10px 0 10px;
 	margin: 5px 0 5px 0;
+	border: none;
+	text-decoration: none;
+	cursor: pointer;
+	text-align: center;
+	transition: background 250ms ease-in-out,
+								transform 150ms ease;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+#grey button:hover:enabled, #grey button:focus:enabled {
+    background: #606060;
+}
+
+#grey button:focus {
+	outline: 1px solid #fff;
+	outline-offset: -4px;
+}
+
+#grey button:active:enabled {
+	transform: scale(0.99);
+}
+
+#grey button:disabled {
+	cursor: default;
+	background: #bbb;
+}
+
+#grey #loading {
+	font-size: 44pt;
+	color: #888;
+	padding: 0 0 0 20px;
+	display: none;
 }
 
 #resultsWrapper {
@@ -158,17 +200,14 @@ h2 a {
 	padding: 0 10px 0 10px;
 	transition: width 0.25s;
 	max-width:99.99%!important;
-	min-width:50px!important;
+	min-width:350px!important;
 	display: inline-block;
+	text-align: center;
 }
 
 .hidden-width {
 	position: absolute;
 	left: -10000px;
-}
-
-#locationInput {
-	width: 320px;
 }
 
 #colophon {
