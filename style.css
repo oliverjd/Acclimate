@@ -31,7 +31,6 @@ body {
 h1, h1 a, h1 a:visited {
 	font-size: 100pt;
 	color: #74b3e1;
-	height: 22vh;
 	text-decoration: none;
 }
 
@@ -87,7 +86,7 @@ h2 a {
 }
 
 #grey button {
-	font-size: 44pt;
+	font-size: 1em;
 	color: #fff;
 	background: #828282;
 	border-radius: 5px;
@@ -125,7 +124,7 @@ h2 a {
 }
 
 #grey #loading {
-	font-size: 44pt;
+	font-size: 1em;
 	color: #888;
 	padding: 0 0 0 20px;
 	display: none;
@@ -135,21 +134,22 @@ h2 a {
 }
 
 #resultsContent {
-	font-size: 28pt;
+	font-size: 24pt;
 }
 
 #resultsContent p {
-	padding-top: 50px;
+	padding-top: 40px;
 }
 
 #resultsContent ul {
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 #resultsContent li {
-	padding-left: 60px;
+	margin-left: 60px;
+	padding-left: 20px;
 	padding-top: 5px;
-	list-style: disc inside;
+	list-style: disc;
 }
 
 #bold {
@@ -157,6 +157,10 @@ h2 a {
 }
 
 #resultsMain {
+}
+
+#reset {
+	margin-top: 10px;
 }
 
 #reset a {
@@ -174,7 +178,7 @@ h2 a {
 	background: #e8e1ca;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
-	font-size: 44pt;
+	font-size: 1em;
 	border: 0;
 	display: inline-block;
 	padding: 0 10px 0 10px;
@@ -185,12 +189,10 @@ h2 a {
 }
 
 .styled-select option {
-	font-weight: 300;
-	font-size: 44pt;
 }
 
 .styled-select input {
-	font-size: 44pt;
+	font-size: 1em;
 	font-weight: 300;
 	color: #9a8330;
 	background: #e8e1ca;
@@ -212,13 +214,13 @@ h2 a {
 
 #colophon {
 	display: block;
-	position: absolute;
+	position: fixed;
 	width: 100%;
-	height: 25px;
 	background: rgb(240,240,240);
-	font-size: 10pt;
+	font-size: 1.4em;
 	text-align: right;
-
+	padding: 0.2em 0;
+	z-index: 2;
 }
 
 #colophon p {
@@ -230,4 +232,150 @@ h2 a {
 	color: black;
 	text-decoration: none;
 	font-weight: 400;
+}
+
+.tooltip {
+	position: relative;
+	display: inline;
+	border-bottom: 2px dotted #666;
+	cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	background-color: #666;
+	color: #fff;
+	text-align: center;
+	padding: 5px 10px;
+	border-radius: 5px;
+	position: fixed;
+	top: 90px;
+	left: 50%;
+	z-index: 1;
+	font-size: 0.7em;
+	width: 500px;
+	transition: opacity 0.2s ease-in;
+	opacity: 0;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+
+
+@media only screen and (max-width : 960px) {
+
+#page {
+	width: 90%;
+}
+
+/* #startWrapper {
+	height: auto;
+}*/
+
+#startContent {
+	position: static;
+	top: 0;
+	padding-top: 70px;
+	transform: none;
+}
+
+/* #startContent {
+	padding-top: 20em;
+} */
+
+#resultsWrapper {
+
+}
+
+#resultsContent {
+	font-size: 18pt;
+	font-weight: 400;
+}
+
+h1, h1 a {
+	font-size: 50pt;
+	padding-bottom: 0.1em;
+	font-weight: 400;
+}
+
+h1 #cc {
+	font-weight: 400;
+}
+
+#startContent p {
+	font-size: 22pt;
+	line-height: 1.5em;
+	font-weight: 400;
+}
+
+.styled-select select {
+	padding: 0.1em 0.2em;
+	margin: 0.1em 0;
+	font-weight: 400;
+}
+
+.styled-select input {
+	max-width:70%!important;
+	min-width:70%!important;
+	padding: 0.1em 0.2em;
+	margin: 0.1em 0;
+	font-weight: 400;
+}
+
+#grey button {
+	padding: 0.3em 0.2em;
+	margin: 0.5em 0 0 0;
+	font-weight: 400;
+}
+
+#colophon {
+	font-size: 12pt;
+	font-weight: 400;
+}
+
+.tooltip .tooltiptext {
+	width: 100%;
+	left: 0;
+	top: 2.5em;
+	position: absolute;
+}
+
+#green {
+	display: inline;
+}
+
+#brown {
+	display: inline;
+}
+
+#grey #loading {
+	font-size: 1em;
+	color: #888;
+	padding: 1em 0 0 0;
+	display: none;
+	font-weight: 400;
+}
+
+#resultsContent li {
+	margin-left: 30px;
+	padding-left: 10px;
+}
+
+#bold {
+	font-weight: bold;
+}
+
+#colophon {
+	padding: 0.5em 0;
+	position: absolute;
+}
+
+#colophon a {
+	font-weight: bold;
+}
+
 }

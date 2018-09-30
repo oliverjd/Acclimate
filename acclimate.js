@@ -137,7 +137,7 @@ function runProgram(jsonParsed, fullLocationName) {
 	} else {
 		resultsHTML += "It will be between <span id=\"bold\">" + rideWeather.coldest + " and " + rideWeather.hottest + " degrees</span> Celcius ";
 	}
-	resultsHTML += "in <span id=\"bold\">" + fullLocationName + "</span>, ";
+	resultsHTML += "in <span id=\"bold\"><span class=\"tooltip\">" + fullLocationName.split(',')[0] + "<span class=\"tooltiptext\">" + fullLocationName + "</span></span></span>, ";
 	if(rideWeather.averageCloud === 0) {
 		resultsHTML += "with a <span id=\"bold\">clear sky</span> ";
 	} else {
