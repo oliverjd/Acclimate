@@ -122,8 +122,8 @@ function resetResults() {
 	document.getElementById('resultsContent').innerHTML = "";
 }
 
-function runProgram(jsonParsed, fullLocationName) {
-	hourlyWeather.parseWeatherData(jsonParsed);
+function runProgram(weatherJsonParsed, fullLocationName) {
+	hourlyWeather.parseWeatherData(weatherJsonParsed);
 
 	var hourSelected = document.getElementById("hourSelect");
 	var rideLength = hourSelected.options[hourSelected.selectedIndex].value;
@@ -186,10 +186,10 @@ function getCoordinatesFromLocation() {
 		url: 'request.php',
 		data: {type: "geocode", string: encodeURI(locationInput)},
     success: function(data){
-			jsonParsed = JSON.parse(data);
-			fullName = jsonParsed[0].display_name;
-			lon = jsonParsed[0].lon;
-			lat = jsonParsed[0].lat;
+			coordiantesJsonParsed = JSON.parse(data);
+			fullName = coordiantesJsonParsed[0].display_name;
+			lon = coordiantesJsonParsed[0].lon;
+			lat = coordiantesJsonParsed[0].lat;
 			getWeatherFromCoordinates(fullName, lat, lon);
     }
 	});
@@ -203,8 +203,21 @@ function getWeatherFromCoordinates(fullName, lat, lon) {
 		url: 'request.php',
 		data: {type: "weather", lat: lat, lon: lon},
     success: function(data){
-			jsonParsed = JSON.parse(data);
-			runProgram(jsonParsed, fullName);
+			weatherJsonParsed = JSON.parse(data);
+			runProgram(weatherJsonParsed, fullName);
+    }
+	});
+}
+
+function reverseGeocode(lat, lon) {
+	$.ajax({
+    type: "GET",
+		url: 'request.php',
+		data: {type: "reverse_geocode", lat: lat, lon: lon},
+    success: function(data){
+			geocodeJsonParsed = JSON.parse(data);
+			console.log(geocodeJsonParsed.display_name);
+			//runProgram(jsonParsed, geocodeJsonParsed.displayName);
     }
 	});
 }
@@ -225,6 +238,29 @@ function startEverything() {
 startSwitch.onclick = function() {
 	startEverything();
 }
+
+function geoSuccess(position) {
+	console.log(position.coords.latitude, position.coords.longitude);
+	reverseGeocode(position.coords.latitude, position.coords.longitude);
+	//getWeatherFromCoordinates(position.coords.latitude, position.coords.longitude)
+};
+
+function geoError(error) {
+	console.log('location denied');
+};
+
+var geoOptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+document.getElementById("useGeolocation").onclick = function() {
+	console.log('locate');
+	navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+}
+
+
 
 function resizable (el, factor) {
   var int = Number(factor) || 7.7;

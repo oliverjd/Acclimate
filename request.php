@@ -22,6 +22,26 @@ if ($type == "geocode") {
 	echo $resp;
 }
 
+if ($type == "reverse_geocode") {
+	$lat = $_REQUEST["lat"];
+	$lon = $_REQUEST["lon"];
+
+	$url = "https://eu1.locationiq.com/v1/reverse.php?key=".$locationiq_api_key."&lat=".$lat."&lon=".$lon."&format=json";
+
+	$curl = curl_init();
+
+	curl_setopt_array($curl, array(
+		CURLOPT_RETURNTRANSFER => 1,
+		CURLOPT_URL => $url
+	));
+
+	$resp = curl_exec($curl);
+	curl_close($curl);
+
+	echo $resp;
+}
+
+
 if ($type == "weather") {
 	$lat = $_REQUEST["lat"];
 	$lon = $_REQUEST["lon"];
