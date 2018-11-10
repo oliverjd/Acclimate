@@ -122,7 +122,7 @@ function resetResults() {
 	document.getElementById('resultsContent').innerHTML = "";
 }
 
-function runProgram(weatherJsonParsed, fullLocationName) {
+function runProgram(weatherJsonParsed, fullLocationName, city) {
 	hourlyWeather.parseWeatherData(weatherJsonParsed);
 
 	var hourSelected = document.getElementById("hourSelect");
@@ -137,7 +137,7 @@ function runProgram(weatherJsonParsed, fullLocationName) {
 	} else {
 		resultsHTML += "It will be between <span id=\"bold\">" + rideWeather.coldest + " and " + rideWeather.hottest + " degrees</span> Celcius ";
 	}
-	resultsHTML += "in <span id=\"bold\"><span class=\"tooltip\">" + fullLocationName.split(',')[0] + "<span class=\"tooltiptext\">" + fullLocationName + "</span></span></span>, ";
+	resultsHTML += "in <span id=\"bold\"><span class=\"tooltip\">" + city + "<span class=\"tooltiptext\">" + fullLocationName + "</span></span></span>, ";
 	if(rideWeather.averageCloud === 0) {
 		resultsHTML += "with a <span id=\"bold\">clear sky</span> ";
 	} else {
@@ -186,25 +186,26 @@ function getCoordinatesFromLocation() {
 		url: 'request.php',
 		data: {type: "geocode", string: encodeURI(locationInput)},
     success: function(data){
-			coordiantesJsonParsed = JSON.parse(data);
-			fullName = coordiantesJsonParsed[0].display_name;
-			lon = coordiantesJsonParsed[0].lon;
-			lat = coordiantesJsonParsed[0].lat;
-			getWeatherFromCoordinates(fullName, lat, lon);
+			coordinatesJsonParsed = JSON.parse(data);
+			console.log(coordinatesJsonParsed)
+			fullName = coordinatesJsonParsed[0].display_name;
+			lon = coordinatesJsonParsed[0].lon;
+			lat = coordinatesJsonParsed[0].lat;
+			getWeatherFromCoordinates(fullName, coordinatesJsonParsed[0].display_name.split(',')[0], lat, lon);
     }
 	});
 
 	return false;
 }
 
-function getWeatherFromCoordinates(fullName, lat, lon) {
+function getWeatherFromCoordinates(fullName, city, lat, lon) {
 	$.ajax({
     type: "GET",
 		url: 'request.php',
 		data: {type: "weather", lat: lat, lon: lon},
     success: function(data){
 			weatherJsonParsed = JSON.parse(data);
-			runProgram(weatherJsonParsed, fullName);
+			runProgram(weatherJsonParsed, fullName, city);
     }
 	});
 }
@@ -216,8 +217,12 @@ function reverseGeocode(lat, lon) {
 		data: {type: "reverse_geocode", lat: lat, lon: lon},
     success: function(data){
 			geocodeJsonParsed = JSON.parse(data);
+			console.log(geocodeJsonParsed);
 			console.log(geocodeJsonParsed.display_name);
-			//runProgram(jsonParsed, geocodeJsonParsed.displayName);
+			globalCoords = {lat: lat, lon: lon, name: geocodeJsonParsed.display_name, city: geocodeJsonParsed.address.city};
+			$("#tick").show();
+			$("#loc").hide();
+			$("#locationInput").val(geocodeJsonParsed.address.city);
     }
 	});
 }
@@ -226,7 +231,12 @@ var startSwitch = document.getElementById('startSwitch');
 
 function startEverything() {
 	resetResults();
-	if(document.getElementById('locationInput').value.length != 0){
+	if (globalCoords != null) {
+		console.log("got global coords:", globalCoords)
+		$("#loading").show();
+		$("#startSwitch").attr("disabled", "disabled");
+		getWeatherFromCoordinates(globalCoords.name, globalCoords.city, globalCoords.lat, globalCoords.lon)
+ 	} else if(document.getElementById('locationInput').value.length != 0){
 		$("#loading").show();
 		$("#startSwitch").attr("disabled", "disabled");
 		return getCoordinatesFromLocation();
@@ -239,10 +249,15 @@ startSwitch.onclick = function() {
 	startEverything();
 }
 
+globalCoords = null;
+
 function geoSuccess(position) {
 	console.log(position.coords.latitude, position.coords.longitude);
 	reverseGeocode(position.coords.latitude, position.coords.longitude);
-	//getWeatherFromCoordinates(position.coords.latitude, position.coords.longitude)
+	//globalCoords = {lat: position.coords.latitude, lon: position.coords.longitude};
+	// TODO: enable start button here
+	$("#startSwitch").removeAttr("disabled");
+	console.log("removing disabled");
 };
 
 function geoError(error) {
@@ -279,6 +294,13 @@ function resizable (el, factor) {
 resizable(document.getElementById('locationInput'),30);
 
 $("#locationInput").keypress(function(e) {
+	// TODO: if text in box, set globalCoords to null and remove tick mark
+	console.log($("#locationInput").val().length)
+	if ($("#locationInput").val().length != 0) {
+		globalCoords = null
+		$("#loc").show()
+		$("#tick").hide()
+	}
 	var enterKey = 13;
 	if(e.which == enterKey) {
 		startEverything();
