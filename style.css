@@ -114,6 +114,11 @@ button {
 	font-size: 0.7em;
 }
 
+#useGeolocation:disabled {
+	background: #333;
+	cursor: default;
+}
+
 #grey button:hover:enabled, #grey button:focus:enabled {
     background: #606060;
 }

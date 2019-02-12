@@ -220,8 +220,8 @@ function reverseGeocode(lat, lon) {
 			console.log(geocodeJsonParsed);
 			console.log(geocodeJsonParsed.display_name);
 			globalCoords = {lat: lat, lon: lon, name: geocodeJsonParsed.display_name, city: geocodeJsonParsed.address.city};
-			$("#tick").show();
-			$("#loc").hide();
+			$("#loc").hide(200);
+			$("#tick").show(200);
 			$("#locationInput").val(geocodeJsonParsed.address.city);
     }
 	});
@@ -257,6 +257,7 @@ function geoSuccess(position) {
 	//globalCoords = {lat: position.coords.latitude, lon: position.coords.longitude};
 	// TODO: enable start button here
 	$("#startSwitch").removeAttr("disabled");
+	$("#useGeolocation").attr("disabled", "disabled");
 	console.log("removing disabled");
 };
 
@@ -300,6 +301,7 @@ $("#locationInput").keypress(function(e) {
 		globalCoords = null
 		$("#loc").show()
 		$("#tick").hide()
+		$("#useGeolocation").removeAttr("disabled");
 	}
 	var enterKey = 13;
 	if(e.which == enterKey) {
