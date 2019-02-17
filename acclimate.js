@@ -222,6 +222,7 @@ function reverseGeocode(lat, lon) {
 			globalCoords = {lat: lat, lon: lon, name: geocodeJsonParsed.display_name, city: geocodeJsonParsed.address.city};
 			$("#loc").hide(200);
 			$("#tick").show(200);
+			$("#useGeolocation").css('background-color', 'rgb(51, 140, 39)');
 			$("#locationInput").val(geocodeJsonParsed.address.city);
     }
 	});
@@ -263,6 +264,9 @@ function geoSuccess(position) {
 
 function geoError(error) {
 	console.log('location denied');
+	$("#loc").hide(200);
+	$("#fail").show(200);
+	$("#useGeolocation").css('background-color', 'rgb(191, 47, 47)');
 };
 
 var geoOptions = {
@@ -273,10 +277,12 @@ var geoOptions = {
 
 document.getElementById("useGeolocation").onclick = function() {
 	console.log('locate');
-	navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+	if ("geolocation" in navigator) {
+		navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions)
+	} else {
+		geoError(null)
+	}
 }
-
-
 
 function resizable (el, factor) {
   var int = Number(factor) || 7.7;
@@ -301,6 +307,8 @@ $("#locationInput").keypress(function(e) {
 		globalCoords = null
 		$("#loc").show()
 		$("#tick").hide()
+		$("#fail").hide()
+		$("#useGeolocation").css('background-color', '#828282');
 		$("#useGeolocation").removeAttr("disabled");
 	}
 	var enterKey = 13;
