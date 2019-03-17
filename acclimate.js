@@ -1,27 +1,35 @@
 var startAgain;
 
+const MPS_TO_MIPH = 2.237;
+
 var hourlyWeather = {}
 hourlyWeather.parseWeatherData = function(jsonObject) {
 	this.tempC = [];
 	this.feelsLikeC = [];
 	this.windSpeedMi = [];
-	this.chanceRain = [];
+	this.rainMm3h = [];
 	this.conditionCode = [];
 	this.cloudPercent = [];
+	console.log(jsonObject)
 	for(i=0; i<24; i++) {
-		this.tempC[i] = jsonObject.hourly_forecast[i].temp.metric;
-		this.feelsLikeC[i] = jsonObject.hourly_forecast[i].feelslike.metric;
-		this.windSpeedMi[i] = jsonObject.hourly_forecast[i].wspd.english;
-		this.chanceRain[i] = jsonObject.hourly_forecast[i].pop;
-		this.conditionCode[i] = jsonObject.hourly_forecast[i].fctcode;
-		this.cloudPercent[i] = jsonObject.hourly_forecast[i].sky;
+		wi = Math.floor(i/3) // API list gives data in 3-hour increments
+		this.tempC[i] = jsonObject.list[wi].main.temp;
+		this.feelsLikeC[i] = jsonObject.list[wi].main.temp;
+		this.windSpeedMi[i] = jsonObject.list[wi].wind.speed * MPS_TO_MIPH;
+		this.conditionCode[i] = jsonObject.list[wi].weather[0].id;
+		this.cloudPercent[i] = jsonObject.list[wi].clouds.all;
+		if (jsonObject.list[wi].rain) {
+			this.rainMm3h[i] = jsonObject.list[wi].rain["3h"];
+		} else {
+			this.rainMm3h[wi] = 0;
+		}
 	}
 };
 
 var rideWeather = {}
 
 var rideWeatherInitial = {
-	chanceRain: 0,
+	rainMm3h: 0,
 	hottest: -1000,
 	coldest: 1000,
 	feelsHottest: -1000,
@@ -38,7 +46,7 @@ rideWeather.calculateRideWeather = function(hours, weather) {
 		if(weather.tempC[i] < this.coldest) this.coldest = parseInt(weather.tempC[i]);
 		if(weather.feelsLikeC[i] > this.feelsHottest) this.feelsHottest = parseInt(weather.feelsLikeC[i]);
 		if(weather.feelsLikeC[i] < this.feelsColdest) this.feelsColdest = parseInt(weather.feelsLikeC[i]);
-		if(weather.chanceRain[i] > this.chanceRain) this.chanceRain = parseInt(weather.chanceRain[i]);
+		if(weather.rainMm3h[i] > this.rainMm3h) this.rainMm3h = parseFloat(weather.rainMm3h[i]);
 		this.averageCloud = this.averageCloud + parseInt(weather.cloudPercent[i]);
 		this.averageTemp = this.averageTemp + parseInt(weather.tempC[i]);
 	}
@@ -53,9 +61,9 @@ var clothesUpper = {
 	winterBase: {state: false, minTemp: 5, maxTemp: 14, name: "Short sleeve winter base layer"},
 	ssJersey: {state: false, minTemp: -99, maxTemp: 99, name: "Short sleeve summer jersey"},
 	lsJersey: {state: false, minTemp: -99, maxTemp: -99, name: "Long sleeve mid-weight jersey"},
-	armWarmers: {state: false, minTemp: 10, maxTemp: 19, name: "Arm warmers"},
-	gilet: {state: false, minTemp: 5, maxTemp: 8, name: "Windproof gilet"},
-	waterproof: {state: false, minTemp: -99, maxTemp: -99, rainCutoff: 10, name: "Waterproof jacket"}
+	armWarmers: {state: false, minTemp: 8, maxTemp: 19, name: "Arm warmers"},
+	gilet: {state: false, minTemp: 5, maxTemp: 8, rainCutoff: 0.01, name: "Windproof gilet"},
+	waterproof: {state: false, minTemp: -99, maxTemp: -99, rainCutoff: 0.1, name: "Waterproof jacket"}
 };
 
 var clothesLower = {
@@ -103,7 +111,7 @@ clothes.applyRules = function(rideWeather) {
 			this[key].state = true;
 		}
 
-		if(this[key].rainCutoff <= rideWeather.chanceRain) {
+		if(this[key].rainCutoff <= rideWeather.rainMm3h) {
 			this[key].state = true;
 		}
 
@@ -143,10 +151,10 @@ function runProgram(weatherJsonParsed, fullLocationName, city) {
 	} else {
 		resultsHTML += "with <span id=\"bold\">" + Math.round(rideWeather.averageCloud) + "% cloud cover</span> ";
 	}
-	if(rideWeather.chanceRain === 0) {
+	if(rideWeather.rainMm3h === 0) {
 		resultsHTML += "and <span id=\"bold\">no chance of rain</span>. ";
 	} else {
-		resultsHTML += "and a <span id=\"bold\">" + rideWeather.chanceRain + "% chance of rain</span>. ";
+		resultsHTML += "and <span id=\"bold\">" + rideWeather.rainMm3h + " mm of rain</span>. ";
 	}
 	resultsHTML += "You should wear:</p><ul>";
 

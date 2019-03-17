@@ -4,5 +4,5 @@ This is a little web-app which helps me know what the weather's going to be like
 
 ## Deployment instructions
 
-- Fill out the `TEMPLATE.api_keys.php` file with API keys for Weather Underground and LocationIQ, and rename to `api_keys.php`.
+- Fill out the `TEMPLATE.api_keys.php` file with API keys for OpenWeatherMap and LocationIQ, and rename to `api_keys.php`.
 - That's it!

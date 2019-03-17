@@ -46,7 +46,7 @@ if ($type == "weather") {
 	$lat = $_REQUEST["lat"];
 	$lon = $_REQUEST["lon"];
 
-	$url = "https://api.wunderground.com/api/".$wunderground_api_key."/hourly/q/".$lat.",".$lon.".json";
+	$url = "https://api.openweathermap.org/data/2.5/forecast?lat=".$lat."&lon=".$lon."&units=metric&appid=".$openweathermap_api_key;
 
 	$curl = curl_init();
 
