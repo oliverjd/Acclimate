@@ -1,2 +1,4 @@
 api_keys.php
 cache.json
+node_modules
+request_worker/.dev.vars
