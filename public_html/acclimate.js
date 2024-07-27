@@ -1,5 +1,6 @@
 var startAgain;
 
+const REQUEST_URL = "https://od-acclimate-request.oliver-afa.workers.dev";
 const MPS_TO_MIPH = 2.237;
 
 var hourlyWeather = {}
@@ -191,7 +192,7 @@ function getCoordinatesFromLocation() {
 	var locationInput = document.getElementById("locationInput").value;
 	$.ajax({
     type: "GET",
-		url: 'request.php',
+		url: REQUEST_URL,
 		data: {type: "geocode", string: encodeURI(locationInput)},
     success: function(data){
 			coordinatesJsonParsed = JSON.parse(data);
@@ -209,7 +210,7 @@ function getCoordinatesFromLocation() {
 function getWeatherFromCoordinates(fullName, city, lat, lon) {
 	$.ajax({
     type: "GET",
-		url: 'request.php',
+		url: REQUEST_URL,
 		data: {type: "weather", lat: lat, lon: lon},
     success: function(data){
 			weatherJsonParsed = JSON.parse(data);
@@ -221,7 +222,7 @@ function getWeatherFromCoordinates(fullName, city, lat, lon) {
 function reverseGeocode(lat, lon) {
 	$.ajax({
     type: "GET",
-		url: 'request.php',
+		url: REQUEST_URL,
 		data: {type: "reverse_geocode", lat: lat, lon: lon},
     success: function(data){
 			geocodeJsonParsed = JSON.parse(data);
