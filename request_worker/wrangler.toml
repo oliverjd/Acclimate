@@ -1,0 +1,5 @@
+name = "od-acclimate-request"
+main = "entry.py"
+compatibility_flags = ["python_workers"]
+compatibility_date = "2023-08-23"
+
