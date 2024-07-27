@@ -195,7 +195,7 @@ function getCoordinatesFromLocation() {
 		url: REQUEST_URL,
 		data: {type: "geocode", string: encodeURI(locationInput)},
     success: function(data){
-			coordinatesJsonParsed = JSON.parse(data);
+			coordinatesJsonParsed = data;
 			console.log(coordinatesJsonParsed)
 			fullName = coordinatesJsonParsed[0].display_name;
 			lon = coordinatesJsonParsed[0].lon;
@@ -213,7 +213,7 @@ function getWeatherFromCoordinates(fullName, city, lat, lon) {
 		url: REQUEST_URL,
 		data: {type: "weather", lat: lat, lon: lon},
     success: function(data){
-			weatherJsonParsed = JSON.parse(data);
+			weatherJsonParsed = data;
 			runProgram(weatherJsonParsed, fullName, city);
     }
 	});
@@ -225,7 +225,7 @@ function reverseGeocode(lat, lon) {
 		url: REQUEST_URL,
 		data: {type: "reverse_geocode", lat: lat, lon: lon},
     success: function(data){
-			geocodeJsonParsed = JSON.parse(data);
+			geocodeJsonParsed = data;
 			console.log(geocodeJsonParsed);
 			console.log(geocodeJsonParsed.display_name);
 			globalCoords = {lat: lat, lon: lon, name: geocodeJsonParsed.display_name, city: geocodeJsonParsed.address.city};
