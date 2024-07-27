@@ -1,0 +1,395 @@
+/* Google Fonts: */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic);
+
+/* Reset: */
+a,abbr,acronym,address,applet,big,blockquote,body,caption,cite,code,dd,del,dfn,div,dl,dt,em,fieldset,font,form,h1,h2,h3,h4,h5,h6,html,iframe,ins,kbd,label,legend,li,object,ol,p,pre,q,s,samp,small,span,strike,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,tt,ul,var{border:0;font-family:inherit;font-size:100%;font-style:inherit;font-weight:inherit;margin:0;outline:0;padding:0;vertical-align:baseline}html{font-size:62.5%;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}body{background:#fff}article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display:block}ol,ul{list-style:none}table{border-collapse:separate;border-spacing:0}caption,td,th{font-weight:400;text-align:left}blockquote:after,blockquote:before,q:after,q:before{content:""}blockquote,q{quotes:"" ""}a:focus{outline:dotted thin}a:active,a:hover{outline:0}a img{border:0}
+
+html, body {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+body {
+	padding: 0;
+}
+
+#page {
+	width: 960px;
+	margin: auto;
+}
+
+#startWrapper {
+	height: 100vh;
+}
+
+#startContent {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+h1, h1 a, h1 a:visited {
+	font-size: 100pt;
+	color: #74b3e1;
+	text-decoration: none;
+}
+
+h1 a:hover, h1 a:active {
+	opacity: 0.7;
+}
+
+h1 #cc {
+	font-style: italic;
+	color: #3e7095;
+	font-weight: 300;
+}
+
+h2, h2 a {
+	font-size: 24pt;
+	color: #74b3e1;
+	text-decoration: none;
+	height: 8vh;
+}
+
+h2 a {
+	color: #3e7095;
+	font-weight: 400;
+}
+
+#startContent p {
+	font-size: 44pt;
+	padding-bottom: 15px;
+	line-height: 130%;
+	/* height: 10vh; */
+}
+
+#green {
+	color: #8db63f;
+}
+
+#brown, #brown a {
+	color: #9a8330;
+	text-decoration: none;
+}
+
+#brown a {
+	background: #e8e1ca;
+	border-radius: 5px;
+	display: inline-block;
+	padding: 0 10px 0 10px;
+	margin: 5px 0 5px 0;
+}
+
+#grey {
+	color: #fff;
+	text-decoration: none;
+}
+
+button {
+	font-size: 1em;
+	border-radius: 5px;
+	display: inline-block;
+	padding: 0 10px 0 10px;
+	margin: 5px 0 5px 0;
+	border: none;
+	text-decoration: none;
+	cursor: pointer;
+	text-align: center;
+	transition: background 250ms ease-in-out,
+								transform 150ms ease;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+#grey button {
+	color: #fff;
+	background: #828282;
+}
+
+#useGeolocation {
+	color: #fff;
+	background: #828282;
+	font-size: 0.7em;
+}
+
+#useGeolocation:disabled {
+	background: #333;
+	cursor: default;
+}
+
+#grey button:hover:enabled, #grey button:focus:enabled {
+    background: #606060;
+}
+
+#grey button:focus {
+	outline: 1px solid #fff;
+	outline-offset: -4px;
+}
+
+#grey button:active:enabled {
+	transform: scale(0.99);
+}
+
+#grey button:disabled {
+	cursor: default;
+	background: #bbb;
+}
+
+#grey #loading {
+	font-size: 1em;
+	color: #888;
+	padding: 0 0 0 20px;
+	display: none;
+}
+
+#resultsWrapper {
+}
+
+#resultsContent {
+	font-size: 24pt;
+}
+
+#resultsContent p {
+	padding-top: 40px;
+}
+
+#resultsContent ul {
+	margin-top: 30px;
+}
+
+#resultsContent li {
+	margin-left: 60px;
+	padding-left: 20px;
+	padding-top: 5px;
+	list-style: disc;
+}
+
+#bold {
+	font-weight: 400;
+}
+
+#resultsMain {
+}
+
+#reset {
+	margin-top: 10px;
+}
+
+#reset a {
+	text-decoration: none;
+	color: black;
+	background-color: rgba(0,0,0,0.1);
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+/* Custom dropdown: */
+
+.styled-select select {
+	color: #9a8330;
+	background: #e8e1ca;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size: 1em;
+	border: 0;
+	display: inline-block;
+	padding: 0 10px 0 10px;
+	margin: 0;
+	border-radius: 5px;
+	-webkit-appearance: none;
+	outline: 0;
+}
+
+.styled-select option {
+}
+
+.styled-select input {
+	font-size: 1em;
+	font-weight: 300;
+	color: #9a8330;
+	background: #e8e1ca;
+	font-family: 'Open Sans', sans-serif;
+	border: 0;
+	border-radius: 5px;
+	padding: 0 10px 0 10px;
+	transition: width 0.25s;
+	max-width:99.99%!important;
+	min-width:350px!important;
+	display: inline-block;
+	text-align: center;
+}
+
+.hidden-width {
+	position: absolute;
+	left: -10000px;
+}
+
+#colophon {
+	display: block;
+	position: fixed;
+	width: 100%;
+	background: rgb(240,240,240);
+	font-size: 1.4em;
+	text-align: right;
+	padding: 0.2em 0;
+	z-index: 2;
+}
+
+#colophon p {
+	padding-right: 10px;
+	padding-top: 3px;
+}
+
+#colophon a {
+	color: black;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+.tooltip {
+	position: relative;
+	display: inline;
+	border-bottom: 2px dotted #666;
+	cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	background-color: #666;
+	color: #fff;
+	text-align: center;
+	padding: 5px 10px;
+	border-radius: 5px;
+	position: fixed;
+	top: 90px;
+	left: 50%;
+	z-index: 1;
+	font-size: 0.7em;
+	width: 500px;
+	transition: opacity 0.2s ease-in;
+	opacity: 0;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
+
+
+@media only screen and (max-width : 960px) {
+
+#page {
+	width: 90%;
+}
+
+/* #startWrapper {
+	height: auto;
+}*/
+
+#startContent {
+	position: static;
+	top: 0;
+	padding-top: 70px;
+	transform: none;
+}
+
+/* #startContent {
+	padding-top: 20em;
+} */
+
+#resultsWrapper {
+
+}
+
+#resultsContent {
+	font-size: 18pt;
+	font-weight: 400;
+}
+
+h1, h1 a {
+	font-size: 50pt;
+	padding-bottom: 0.1em;
+	font-weight: 400;
+}
+
+h1 #cc {
+	font-weight: 400;
+}
+
+#startContent p {
+	font-size: 22pt;
+	line-height: 1.5em;
+	font-weight: 400;
+}
+
+.styled-select select {
+	padding: 0.1em 0.2em;
+	margin: 0.1em 0;
+	font-weight: 400;
+}
+
+.styled-select input {
+	max-width:70%!important;
+	min-width:70%!important;
+	padding: 0.1em 0.2em;
+	margin: 0.1em 0;
+	font-weight: 400;
+}
+
+#grey button {
+	padding: 0.3em 0.2em;
+	margin: 0.5em 0 0 0;
+	font-weight: 400;
+}
+
+#colophon {
+	font-size: 12pt;
+	font-weight: 400;
+}
+
+.tooltip .tooltiptext {
+	width: 100%;
+	left: 0;
+	top: 2.5em;
+	position: absolute;
+}
+
+#green {
+	display: inline;
+}
+
+#brown {
+	display: inline;
+}
+
+#grey #loading {
+	font-size: 1em;
+	color: #888;
+	padding: 1em 0 0 0;
+	display: none;
+	font-weight: 400;
+}
+
+#resultsContent li {
+	margin-left: 30px;
+	padding-left: 10px;
+}
+
+#bold {
+	font-weight: bold;
+}
+
+#colophon {
+	padding: 0.5em 0;
+	position: absolute;
+}
+
+#colophon a {
+	font-weight: bold;
+}
+
+}

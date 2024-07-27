@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="acclimate.js" defer></script>
+	<title>Acclimate</title>
+	<link rel="stylesheet" href="style.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="So, you're going for a bike ride. Don't waste time with the forecast. Acclimate will tell you what to wear depending on ride location, duration and weather conditions.">
+	<meta name="theme-color" content="#74b3e1">
+	<link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicons/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="img/favicons/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicons/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="img/favicons/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="img/favicons/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="img/favicons/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="img/favicons/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="img/favicons/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
+	<link rel="manifest" href="img/favicons/manifest.json">
+	<meta name="msapplication-TileColor" content="#74b3e1">
+	<meta name="msapplication-TileImage" content="img/favicons/ms-icon-144x144.png">
+</head>
+<body>
+	<div id="startAnchor"></div>
+	<div id="colophon"><p>Created by <a href="https://dunkley.me">Oliver Dunkley</a> ⋅ Fork me on <a href="https://github.com/oliverjd/acclimate">GitHub</a></p></div>
+	<div id="page">
+		<div id="startWrapper">
+			<div id="startContent">
+				<h1><a href=".">A<span id="cc">cc</span>limate.</a></h1>
+				<p id="green">So, you're going for a bike ride. </p>
+				<p id="green">Don't waste time with the forecast. </p>
+				<p id="brown">For a ride lasting
+				<span class="styled-select">
+					<select id="hourSelect" class="select-class">
+						<option value="1">1</option>
+						<option value="2" SELECTED>2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+					</select>
+				</span><!--<a href="" id="rideHours">two</a>--> hours, </p>
+				<p id="brown">starting from
+				<span class="styled-select">
+					<input type="text" id="locationInput" class="input-class" placeholder=" somewhere ">
+					<button id="useGeolocation" type="button"><img id="loc" src="img/location-icon-white.svg" width=30 /><img id="tick" src="img/tick.svg" width=30 hidden /><img id="fail" src="img/cross.svg" width=30 hidden /></button>
+				</span>
+				,</p>
+				<p id="grey">
+					<!-- <a href="" id="startSwitch">tell me what to wear!</a> -->
+					<button id="startSwitch" type="button" disabled="disabled">tell me what to wear!</button> <span id="loading">loading...</span>
+				</p>
+			</div>
+		</div>
+		<div id="resultsWrapper">
+			<div id="resultsContent"></div>
+		</div>
+		<div id="endAnchor"></div>
+	</div>
+</body>
+</html>
